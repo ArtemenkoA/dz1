@@ -1,4 +1,7 @@
-﻿internal class Program
+﻿
+using dz1;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
@@ -46,13 +49,15 @@
             vibor = Answer();
             if (vibor == 1)
             {
-                string number_str;
-                Console.WriteLine(number_str = options[rnd.Next(0, options.Length)]);
+                string number_str; int count;
+                Console.WriteLine(number_str = options[count = rnd.Next(0, options.Length)]);
                 DateTime StartedAT = DateTime.Now;
                 Console.ReadLine();
                 TimeSpan span = DateTime.Now - StartedAT;
+                Stroka str = new Stroka(count, span, 0);
+
                 int min = (int)(span.Seconds);
-                Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту.", span, number_str.Length/min*60);
+                Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту.", str.Time, number_str.Length/min*60);
                 Console.WriteLine("Попробовать еще раз? (да - 1/ нет - 0)");
 
             }
@@ -60,5 +65,3 @@
 
     }
 }
-
-//class 
