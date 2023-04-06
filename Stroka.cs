@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-namespace Stroka
+namespace dz1
 {
     class Stroka
     {
