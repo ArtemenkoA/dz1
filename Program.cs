@@ -87,6 +87,11 @@ internal class Program
         int code_lang = Answer();
         ChoiceLang choiceLang = (ChoiceLang)code_lang;
 
+        int count_try = 0;
+
+        List<Stroka> Strings = new List<Stroka>();
+        List<int> SpeedWriteTry = new List<int>();  
+
 
         Console.WriteLine("Начать? (да - 1/ нет - 0)");
         
@@ -122,14 +127,24 @@ internal class Program
                         errors += number_str.Length - answer.Length;
                     }
 
-                    Stroka str = new(count, span, errors);
+                    Strings.Add(new(count, span, errors));
 
-                    int min = (int)(span.Seconds);
-                    Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту, количество ошибок: {2}", str.Time, number_str.Length / min * 60, str.Error);
+                    double min = (double)(span.Seconds);
+
+                    int SpeedWrite = (int)(number_str.Length / min * 60);
+                    
+                    SpeedWriteTry.Add(SpeedWrite);
+
+                    Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту, количество ошибок: {2}", Strings.Last().Time, SpeedWrite, Strings.Last().Error);
                     Console.WriteLine("Попробовать еще раз? (да - 1/ нет - 0)");
+                    count_try++;
                 }
             }
         } while (vibor != 0);
 
+        int max_speed = SpeedWriteTry.Max();
+        int min_speed = SpeedWriteTry.Min();
+        double medium_speed = SpeedWriteTry.Sum()/SpeedWriteTry.Count;
+        Console.WriteLine("у вас было {0} попыток, средняя скорость - {1} зн/мин, лучшая - {2} зн/мин, худшая {3} зн/мин\r\n", count_try, medium_speed, max_speed, min_speed);
     }
 }
