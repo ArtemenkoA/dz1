@@ -1,5 +1,4 @@
-﻿
-using dz1;
+﻿using dz1;
 using System.ComponentModel;
 using System;
 
@@ -80,22 +79,17 @@ internal class Program
         dictionary.Add(ChoiceLang.Rus, RussiansStr);
         dictionary.Add(ChoiceLang.Eng, EnglishStr);
 
-
         //НАЧАЛО РАБОТЫ
         Console.WriteLine("Выбор языка: 0 - английский, 1 - русский");
 
         int code_lang = Answer();
         ChoiceLang choiceLang = (ChoiceLang)code_lang;
 
-        int count_try = 0;
-
-        List<Stroka> Strings = new List<Stroka>();
-        List<int> SpeedWriteTry = new List<int>();  
-
+        List<Stroka> Strings = new List<Stroka>();//для хранения статистики по попыткам
+        List<int> SpeedWriteTry = new List<int>();//для хранения статистики скорости
 
         Console.WriteLine("Начать? (да - 1/ нет - 0)");
         
-
         do
         {
             vibor = Answer();
@@ -137,14 +131,10 @@ internal class Program
 
                     Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту, количество ошибок: {2}", Strings.Last().Time, SpeedWrite, Strings.Last().Error);
                     Console.WriteLine("Попробовать еще раз? (да - 1/ нет - 0)");
-                    count_try++;
                 }
             }
         } while (vibor != 0);
-
-        int max_speed = SpeedWriteTry.Max();
-        int min_speed = SpeedWriteTry.Min();
-        double medium_speed = SpeedWriteTry.Sum()/SpeedWriteTry.Count;
-        Console.WriteLine("у вас было {0} попыток, средняя скорость - {1} зн/мин, лучшая - {2} зн/мин, худшая {3} зн/мин\r\n", count_try, medium_speed, max_speed, min_speed);
+        
+        Console.WriteLine("у вас было {0} попыток, средняя скорость - {1} зн/мин, лучшая - {2} зн/мин, худшая {3} зн/мин\r\n", Strings.Count, SpeedWriteTry.Sum() / SpeedWriteTry.Count, SpeedWriteTry.Max(), SpeedWriteTry.Min());
     }
 }
