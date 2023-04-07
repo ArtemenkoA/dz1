@@ -51,9 +51,13 @@ internal class Program
             {
                 string number_str, answer; int count, errors = 0;
                 Console.WriteLine(number_str = options[count = rnd.Next(0, options.Length)]);
+
                 DateTime StartedAT = DateTime.Now;
+                
                 answer = Console.ReadLine();
+
                 TimeSpan span = DateTime.Now - StartedAT;
+
                 for (int i = 0; i < answer.Length; i++)
                 {
                     if (answer[i] != number_str[i])
@@ -62,10 +66,15 @@ internal class Program
                     }
                 }
 
-                Stroka str = new Stroka(count, span, errors);
+                if (answer.Length < number_str.Length)
+                {
+                    errors += number_str.Length - answer.Length;
+                }
+
+                Stroka str = new(count, span, errors);
 
                 int min = (int)(span.Seconds);
-                Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту, количество ошибок: {3}", str.Time, number_str.Length/min*60, str.Error);
+                Console.WriteLine("Время печати: {0}, скорость печати: {1} символов в минуту, количество ошибок: {2}", str.Time, number_str.Length/min*60, str.Error);
                 Console.WriteLine("Попробовать еще раз? (да - 1/ нет - 0)");
 
             }
